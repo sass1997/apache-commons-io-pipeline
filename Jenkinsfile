@@ -7,7 +7,7 @@ pipeline {
             steps {
                 echo 'Checkout Project'
                 dir ('apache-commons-io') {
-                checkout([$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/apache/commons-io.git']], branches: [[name: '*/main']]])
+                checkout([$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/apache/commons-io.git']], branches: [[name: '*/master']]])
 
 sh "ls -lart ./*"
                 }

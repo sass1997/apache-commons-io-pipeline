@@ -28,7 +28,10 @@ pipeline {
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 ''' 
-                sh "java -showversion"
+                
+                
+
+                
                 sh "mvn --version"           
                     
                 }

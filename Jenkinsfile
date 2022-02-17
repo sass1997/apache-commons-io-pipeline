@@ -23,11 +23,8 @@ pipeline {
             steps {
                 echo 'Building..'
                 dir ('apache-commons-io') {
-                    sh """
-                    export MAVEN_HOME=/opt/maven
-                    export PATH=$PATH:$MAVEN_HOME/bin
-                    mvn --version
-                    """
+                def mvnHome = tool name: 'maven-3-8-4', type: 'maven'
+                sh "${mvnHome}/bin/mvn -B -DskipTests clean package"
                     
                     
                 }

@@ -24,11 +24,11 @@ pipeline {
             steps {
                 echo 'Building..'
                 dir ('apache-commons-io') {
-                    withEnv(["JAVA_HOME=${ tool 'java-9' }", "PATH+MAVEN=${tool 'maven-3.8.4'}/bin:${env.JAVA_HOME}/bin"]) {
-
-                        sh "mvn --version"
-
-                    }             
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
+                sh "mvn --version"           
                     
                 }
 

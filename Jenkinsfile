@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout apache-commons-io') {
             steps {
                 echo 'Checkout Project'
-                checkout([$class: 'GitSCM', url: 'https://github.com/apache/commons-io.git', branches: [[name: '*/main']]])
+                checkout([$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/apache/commons-io.git']], branches: [[name: '*/main']]])
 
 
 

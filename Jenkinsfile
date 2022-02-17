@@ -2,7 +2,6 @@ pipeline {
     /*
     Installed Plugins
     Maven Integration - Version 3.17
-    Pipeline Maven Integration - Version:
     */
     agent any
     tools {
@@ -22,30 +21,49 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Building..'
-                dir ('apache-commons-io') {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
-                
-                
-
-
-                sh "maven --version"           
-                    
+                echo 'Build'
+                dir ('apache-commons-io') { 
+                    sh "mvn clean package -DskipTests=true"                    
                 }
 
             }
         }
-        stage('Test') {
+        stage("Benchmark") {
             steps {
-                echo 'Testing..'
+                echo "Run Profile Benchmark"
+                 dir ('apache-commons-io') { 
+                    sh "mvn clean package -P benchmark"                    
+                }
             }
         }
+        stage('Test') {
+            steps {
+                echo 'Tests'
+                dir ('apache-commons-io') { 
+                    sh "mvn test"
+                }
+            }
+        }
+        // Additional Possible Stage to Upload Code and Test Result to SonarQube
+        // Pre Requisite would be to have a SonarQube Instance Running
+        stage('Quality') {
+            steps {
+                echo 'Run Sonar'
+                dir ('apache-commons-io') { 
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+
+        // Additional Possible Stage if you would like to deploy your builded maven artefacts to upstream e.x https://repo.maven.apache.org
+        // Project has already defined a Release Profile to do prepare the versions in pom.xml
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo 'Deploy'
+                dir ('apache-commons-io') { 
+                    sh "mvn package -P release"
+                    sh "mvn deploy"
+                }
             }
         }
     }

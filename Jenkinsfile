@@ -1,4 +1,6 @@
 pipeline {
+    # Installed Plugins
+    # 	Maven IntegrationVersion 3.17
     agent any
     tools {
         maven 'maven-3.8.4' 

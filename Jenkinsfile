@@ -8,7 +8,7 @@ pipeline {
                 echo 'Checkout Project'
                 checkout([$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/apache/commons-io.git']], branches: [[name: '*/main']]])
 
-
+sh "ls -lart ./*"
 
             }
         }

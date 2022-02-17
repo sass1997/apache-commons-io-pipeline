@@ -1,7 +1,8 @@
 pipeline {
     /*
     Installed Plugins
-    Maven IntegrationVersion 3.17
+    Maven Integration - Version 3.17
+    Pipeline Maven Integration - Version:
     */
     agent any
     tools {
@@ -23,9 +24,9 @@ pipeline {
             steps {
                 echo 'Building..'
                 dir ('apache-commons-io') {
-                def mvnHome = tool name: 'maven-3-8-4', type: 'maven'
-                sh "${mvnHome}/bin/mvn -B -DskipTests clean package"
-                    
+                withMaven(maven: 'mvn') {
+                    sh "mvn clean package"
+                }               
                     
                 }
 

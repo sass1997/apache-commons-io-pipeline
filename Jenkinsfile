@@ -1,21 +1,26 @@
 pipeline {
     agent any
-
+    tools {
+        maven 'maven-3.8.4' 
+    }
     stages {
-dir ('apache-commons-io') {
+
         stage('Checkout apache-commons-io') {
             steps {
                 echo 'Checkout Project'
-                
-                checkout([$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/apache/commons-io.git']], branches: [[name: '*/master']]])
-                
-
+                dir ('apache-commons-io') {
+                    checkout([$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/apache/commons-io.git']], branches: [[name: '*/master']]])
+                }
             }
         }
 
         stage('Build') {
             steps {
                 echo 'Building..'
+                dir ('apache-commons-io') {
+                    sh "maven clean package"
+                }
+
             }
         }
         stage('Test') {
@@ -28,6 +33,5 @@ dir ('apache-commons-io') {
                 echo 'Deploying....'
             }
         }
-    }
     }
 }

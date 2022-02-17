@@ -2,15 +2,13 @@ pipeline {
     agent any
 
     stages {
-
+dir ('apache-commons-io') {
         stage('Checkout apache-commons-io') {
             steps {
                 echo 'Checkout Project'
-                dir ('apache-commons-io') {
+                
                 checkout([$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/apache/commons-io.git']], branches: [[name: '*/master']]])
-
-sh "ls -lart ./*"
-                }
+                
 
             }
         }
@@ -30,5 +28,6 @@ sh "ls -lart ./*"
                 echo 'Deploying....'
             }
         }
+    }
     }
 }

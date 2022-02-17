@@ -23,7 +23,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 dir ('apache-commons-io') {
-                    sh "maven clean package"
+                    sh "mvn clean package"
                 }
 
             }

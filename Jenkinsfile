@@ -6,9 +6,11 @@ pipeline {
         stage('Checkout apache-commons-io') {
             steps {
                 echo 'Checkout Project'
+                dir ('apache-commons-io') {
                 checkout([$class: 'GitSCM', userRemoteConfigs: [[url: 'https://github.com/apache/commons-io.git']], branches: [[name: '*/main']]])
 
 sh "ls -lart ./*"
+                }
 
             }
         }

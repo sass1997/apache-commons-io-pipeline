@@ -31,7 +31,7 @@ pipeline {
                 
                 
 
-
+sh "ls -la /var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/maven-3.8.4/bin"
                 sh "/var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/maven-3.8.4/bin --version"           
                     
                 }

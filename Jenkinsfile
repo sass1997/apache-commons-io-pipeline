@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout apache-commons-io') {
             steps {
                 echo 'Checkout Project'
-                checkout([$class: 'MercurialSCM', source: 'https://github.com/apache/commons-io.git'])
+                checkout([$class: 'MercurialSCM', source: 'https://github.com/apache/commons-io.git', branch: 'main'])
 
 
 
